@@ -2,7 +2,7 @@
 
 -- Forma 2: todos os atributos tem que ser dependentes da chave primaria
 
--- Forma 3: não pode atributos compostos ou transitorios (tirar todos os dados que repetem dos atributos e transformar em outra tabela)
+-- Forma 3: nÃ£o pode atributos compostos ou transitorios (tirar todos os dados que repetem dos atributos e transformar em outra tabela)
  
  
 ----------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ ALTER TABLE END_CLIENTE
 
     REFERENCES BAIRRO (id_bairro);
 
--- Caso precise dropar as tabelas (ordem inversa da criação)
+-- Caso precise dropar as tabelas (ordem inversa da criaÃ§Ã£o)
 
 DROP TABLE END_CLIENTE;
 
@@ -144,13 +144,13 @@ VALUES (2, 'Argentina');
  
 INSERT INTO PAIS (id_pais, nome_pais) 
 
-VALUES (3, 'R�ssia');
+VALUES (3, 'Rússia');
  
 -- Inserindo dados na tabela ESTADO
 
 INSERT INTO ESTADO (id_estado, nome_estado, id_pais) 
 
-VALUES (1, 'S�o Paulo', 1);
+VALUES (1, 'São Paulo', 1);
  
 INSERT INTO ESTADO (id_estado, nome_estado, id_pais) 
 
@@ -160,7 +160,7 @@ VALUES (2, 'Buenos Aires', 2);
 
 INSERT INTO CIDADE (id_cidade, nome_cidade, id_estado) 
 
-VALUES (1, 'S�o Paulo', 1);
+VALUES (1, 'São Paulo', 1);
  
 INSERT INTO CIDADE (id_cidade, nome_cidade, id_estado) 
 
@@ -325,5 +325,54 @@ select
 group  by 
     a.nom_pais,
         b.nom_estado
-order by 3 desc,1,2
- 
+order by 3 desc,1,2;
+// introdução a bloco anonimo
+
+SET SERVEROUTPUT ON;
+DECLARE
+
+    IDADE NUMBER;
+    NOME VARCHAR2(30) :='vergs';
+    ENDEREÇO VARCHAR2(50) :='&ENDEREÇO';
+BEGIN
+    idade :=39;
+    dbms_output.put_line('A IDADE INFORMADA É :'|| idade);
+    dbms_output.put_line('o nome informado é :'|| nome);
+    dbms_output.put_line('o endereço informado é :'|| ENDEREÇO);
+    
+END;
+set serveroutput on;
+declare 
+salario number(10,2) := 1500.00;
+// salario_novo number := 1500.00 * 1.25;
+begin 
+    dbms_output.put_line('o salario inicial é de :'|| salario);
+    dbms_output.put_line('o salario final é de :'||salario * 1.25);
+end;
+set serveroutput on;
+declare 
+    dollar number :='&dollar';
+    real NUMBER := 45;
+begin
+    dbms_output.put_line('vc consegue pegar '||round((real / dollar),2) ||' dolares');
+end;
+
+
+set serveroutput on;
+declare 
+    valor_carro number :=&valor;
+    juros float := valor_carro *1.03;
+    parcelas float := juros / 10;
+begin
+    dbms_output.put_line('o valor do carro é de R$'||valor_carro);
+    dbms_output.put_line('o valor de cada parcela sera de R$'|| parcelas);
+end;
+
+set serveroutput on;
+declare 
+    valor_carro number :=&valor;
+    
+begin
+    dbms_output.put_line('o valor do carro é de R$'||valor_carro);
+    dbms_output.put_line('o valor de cada parcela sera de R$'||round((valor_carro / 10),2) );
+end;
